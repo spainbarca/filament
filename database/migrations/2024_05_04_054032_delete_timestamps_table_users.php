@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('created_at');
-            $table->dropColumn('updated_at');
+            if (Schema::hasColumn('users', 'created_at')) {
+                $table->dropColumn('created_at');
+            }
+
+            if (Schema::hasColumn('users', 'updated_at')) {
+                $table->dropColumn('updated_at');
+            }
         });
     }
 
