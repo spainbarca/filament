@@ -25,9 +25,10 @@ class CommentResource extends Resource
             ->schema([
                 Forms\Components\Select::make('post_id')
                     ->relationship('post', 'title'),
-                Forms\Components\Textarea::make('body')
+                Forms\Components\RichEditor::make('body')
                     ->required()
                     ->columnSpanFull(),
+
             ]);
     }
 
@@ -37,6 +38,8 @@ class CommentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('post.title')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('body')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
